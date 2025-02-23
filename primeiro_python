@@ -1,0 +1,44 @@
+def calcular_dia_da_semana(dia_semana_1_jan, dias_entre_datas):
+  """
+  Função para calcular o dia da semana da nova data.
+  """
+  dias_da_semana = ["segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado", "domingo"]
+  dia_semana_numero = dias_da_semana.index(dia_semana_1_jan.lower())
+
+  return dias_da_semana[(dia_semana_numero + dias_entre_datas) % 7]
+
+def calcular_dias_entre_datas(ano1, mes1, dia1, ano2, mes2, dia2):
+  """
+  Função para calcular o número de dias entre duas datas.
+  """
+  # Contagem de dias de anos bissextos
+  bissexto1 = 1 if (ano1 % 4 == 0 and ano1 % 100 != 0) or (ano1 % 400 == 0) else 0
+  bissexto2 = 1 if (ano2 % 4 == 0 and ano2 % 100 != 0) or (ano2 % 400 == 0) else 0
+
+  dias_por_mes_ano1 = [0, 31, 28 + bissexto1, 31, 30, 31, 30, 31, 31, 30, 31, 30]
+  dias_por_mes_ano2 = [0, 31, 28 + bissexto2, 31, 30, 31, 30, 31, 31, 30, 31, 30]
+
+  total_dias1 = ano1 * 365 + sum(dias_por_mes_ano1[:mes1]) + dia1
+  total_dias2 = ano2 * 365 + sum(dias_por_mes_ano2[:mes2]) + dia2
+
+  return abs(total_dias2 - total_dias1)
+
+
+# Pedir ao usuário o dia da semana de 1° de janeiro do ano
+dia_semana_1_jan = input("Digite o dia da semana em que ocorre 1° de janeiro do ano (Ex: segunda-feira): ")
+
+# Pedir ao usuário a segunda data
+segunda_data = input("Digite a nova data (Formato: DD/MM/YYYY): ")
+
+# Extrair os elementos da segunda data
+dia2, mes2, ano2 = map(int, segunda_data.split('/'))
+
+# Calcular o número de dias entre 1° de janeiro e a segunda data
+# Consideramos fevereiro com 28 dias, então serão 31 dias (janeiro) + 28 dias (fevereiro)
+dias_entre_datas = calcular_dias_entre_datas(2024, 1, 1, ano2, mes2, dia2)
+
+# Calcular o dia da semana da nova data
+dia_da_semana_nova_data = calcular_dia_da_semana(dia_semana_1_jan, dias_entre_datas)
+
+# Imprimir o dia da semana da nova data
+print("O dia da semana da nova data é:", dia_da_semana_nova_data)

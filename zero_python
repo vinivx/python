@@ -1,0 +1,3 @@
+gasto = float(input('Digite o valor gasto pelo cliente: '))
+total = gasto + (gasto * 0.10)
+print(f'O valor total a ser pago é: {total}')

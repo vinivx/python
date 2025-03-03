@@ -1,0 +1,13 @@
+salario = float(input('Digite o seu salário'))
+if salario <= 2509.20:
+  aliquota = 0
+elif salario <= 2826.65:
+  aliquota = 0.075
+elif salario <= 3751.05:
+  aliquota = 0.15
+elif salario <= 4664.68:
+  aliquota = 0.225
+elif salario > 4664.68:
+  aliquota = 0.275
+
+print('O valor do desconto é de R$ %.2f' % (salario * aliquota))
